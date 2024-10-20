@@ -46,8 +46,7 @@ issues, as well as missing features.
 
 ### Installation
 
-Please see the `installation section <https://codeigniter.com/userguide3/installation/index.html>`_
-of the CodeIgniter User Guide.
+Please see the [installation section](https://codeigniter.com/userguide3/installation/index.html) of the CodeIgniter User Guide.
 
 ### License
 
@@ -56,12 +55,12 @@ agreement <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/so
 
 ### Resources
 
--  `User Guide <https://codeigniter.com/userguide3/>`_
--  `Contributing Guide <https://github.com/bcit-ci/CodeIgniter/blob/develop/contributing.md>`_
--  `Language File Translations <https://github.com/bcit-ci/codeigniter3-translations>`_
--  `Community Forums <https://forum.codeigniter.com/>`_
--  `Community Wiki <https://github.com/bcit-ci/CodeIgniter/wiki>`_
--  `Community Slack Channel <https://codeigniterchat.slack.com>`_
+* [User Guide](https://codeigniter.com/userguide3/)
+* [Contributing Guide](https://github.com/bcit-ci/CodeIgniter/blob/develop/contributing.md)
+* Language File Translations <https://github.com/bcit-ci/codeigniter3-translations>
+* Community Forums <https://forum.codeigniter.com/>
+* Community Wiki <https://github.com/bcit-ci/CodeIgniter/wiki>
+* Community Slack Channel <https://codeigniterchat.slack.com>
 
 Report security issues to our `Security Panel <mailto:security@codeigniter.com>`_
 or via our `page on HackerOne <https://hackerone.com/codeigniter>`_, thank you.
