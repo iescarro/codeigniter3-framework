@@ -406,6 +406,26 @@ class CI_Loader {
 		return $this;
 	}
 
+	public function jobs()
+	{
+		// Define the path to the jobs directory
+		$jobs_path = APPPATH . 'jobs/';
+
+		// Check if the jobs directory exists
+		if (is_dir($jobs_path)) {
+			// Scan the jobs directory for PHP files
+			$files = scandir($jobs_path);
+
+			// Loop through each file and include it
+			foreach ($files as $file) {
+				// Ensure we only include PHP files
+				if (pathinfo($file, PATHINFO_EXTENSION) === 'php') {
+					require_once $jobs_path . $file;
+				}
+			}
+		}
+	}
+
 	// --------------------------------------------------------------------
 
 	/**

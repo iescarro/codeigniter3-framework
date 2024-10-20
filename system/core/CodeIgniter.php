@@ -291,6 +291,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 	$IN =& load_class('Input', 'core', $SEC);
 
+$JOB = &load_class('Job', 'core', $SEC);
+
 /*
  * ------------------------------------------------------
  *  Load the Language class
