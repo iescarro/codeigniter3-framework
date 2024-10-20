@@ -1,13 +1,12 @@
 {
 	"description": "The CodeIgniter3 framework",
 	"name": "iescarro/codeigniter3-framework",
-	"homepage": "https://codeigniter.com",
+	"homepage": "https://github.com/iescarro/codeigniter3-framework",
 	"license": "MIT",
 	"support": {
-		"forum": "https://forum.codeigniter.com/",
-		"wiki": "https://github.com/bcit-ci/CodeIgniter/wiki",
-		"slack": "https://codeigniterchat.slack.com",
-		"source": "https://github.com/bcit-ci/CodeIgniter"
+		"forum": "https://github.com/iescarro/codeigniter3-framework/issues",
+		"wiki": "https://github.com/iescarro/codeigniter3-framework/wiki",
+		"source": "https://github.com/iescarro/codeigniter3-framework"
 	},
 	"require": {
 		"php": ">=5.4.8"
