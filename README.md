@@ -1,9 +1,9 @@
-<p align="center"><img src="/art/logo.png" alt="Logo CodeIgniter3 Auth"></p>
+<p align="center"><img src="/art/logo.png" alt="Logo CodeIgniter3 Framework"></p>
 
 <p align="center">
-    <a href="https://packagist.org/packages/iescarro/codeigniter3-auth"><img src="https://img.shields.io/packagist/dt/iescarro/codeigniter3-auth" alt="Total Downloads"></a>
-    <a href="https://packagist.org/packages/iescarro/codeigniter3-auth"><img src="https://img.shields.io/packagist/v/iescarro/codeigniter3-auth" alt="Latest Stable Version"></a>
-    <a href="https://packagist.org/packages/iescarro/codeigniter3-auth"><img src="https://img.shields.io/packagist/l/iescarro/codeigniter3-auth" alt="License"></a>
+    <a href="https://packagist.org/packages/iescarro/codeigniter3-framework"><img src="https://img.shields.io/packagist/dt/iescarro/codeigniter3-framework" alt="Total Downloads"></a>
+    <a href="https://packagist.org/packages/iescarro/codeigniter3-framework"><img src="https://img.shields.io/packagist/v/iescarro/codeigniter3-framework" alt="Latest Stable Version"></a>
+    <a href="https://packagist.org/packages/iescarro/codeigniter3-framework"><img src="https://img.shields.io/packagist/l/iescarro/codeigniter3-framework" alt="License"></a>
 </p>
 
 ## What is CodeIgniter
