@@ -504,6 +504,31 @@ if ( ! function_exists('url_title'))
 
 // ------------------------------------------------------------------------
 
+if (!function_exists('redirect_if')) {
+	/**
+	 * Header Redirect
+	 *
+	 * Header redirect in two flavors
+	 * For very fine grained control over headers, you could use the Output
+	 * Library's set_header() function.
+	 *
+	 * @param bool    $condition Condition for redirect
+	 * @param	string	$uri	URL
+	 * @param	string	$method	Redirect method
+	 *			'auto', 'location' or 'refresh'
+	 * @param	int	$code	HTTP Response status code
+	 * @return	void
+	 */
+	function redirect_if($condition, $uri = '', $method = 'auto', $code = NULL)
+	{
+		if ($condition) {
+			redirect($uri, $method, $code);
+		}
+	}
+}
+
+// ------------------------------------------------------------------------
+
 if ( ! function_exists('redirect'))
 {
 	/**
