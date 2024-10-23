@@ -50,6 +50,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 // ------------------------------------------------------------------------
 
+if (!function_exists('guid')) {
+	/**
+	 * GUID
+	 *
+	 * Returns a string GUID
+	 *
+	 * @return	string
+	 */
+	function guid()
+	{
+		if (function_exists('com_create_guid')) {
+			// Use Windows built-in function
+			return trim(com_create_guid(), '{}');
+		} else {
+			// Generate a GUID manually
+			$data = openssl_random_pseudo_bytes(16);
+			$data[6] = chr(ord($data[6]) & 0x0f | 0x40); // Version 4
+			$data[8] = chr(ord($data[8]) & 0x3f | 0x80); // Variant is 10
+			return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+		}
+	}
+}
+
+// ------------------------------------------------------------------------
+
 if ( ! function_exists('strip_slashes'))
 {
 	/**
