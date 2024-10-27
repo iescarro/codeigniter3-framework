@@ -35,9 +35,10 @@
  * @since	Version 1.0.0
  * @filesource
  */
-defined('BASEPATH') or exit('No direct script access allowed');
 
 namespace CodeIgniter3\Commands;
+
+defined('BASEPATH') or exit('No direct script access allowed');
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
