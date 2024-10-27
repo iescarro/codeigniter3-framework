@@ -103,31 +103,38 @@ class Generator
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class {class} extends CI_Model {
-	function __construct() {
+class {class} extends CI_Model
+{
+	function __construct()
+	{
 		\$this->load->database();
 	}
 
-	function save({var}) {
+	function save({var})
+	{
 		\$this->db->insert('{table}', {var});
 		return \$this->db->insert_id();
 	}
 
-	function read(\$id) {
+	function read(\$id)
+	{
 		return \$this->db->get_where('{table}', ['id' => \$id])->row();
 	}
 
-	function find_all() {
+	function find_all()
+	{
 		return \$this->db->get('{table}')->result();
 	}
 
-	function update({var}, \$id) {
+	function update({var}, \$id)
+	{
 		\$this->db->update('{table}', {var}, ['id' => \$id]);
 	}
 
-	function delete(\$id) {
-    \$this->db->delete('{table}', ['id' => \$id]);
-  }
+	function delete(\$id)
+	{
+		\$this->db->delete('{table}', ['id' => \$id]);
+	}
 }";
     $content = str_replace(
       ['{var}', '{table}', '{class}'],
@@ -150,7 +157,8 @@ class {class} extends CI_Model {
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-function {component}_form() {
+function {component}_form()
+{
 	\$obj = &get_instance();
 	return [
 {fields}
@@ -180,8 +188,10 @@ function {component}_form() {
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Migration_{class} extends CI_Migration {
-	function up() {
+class Migration_{class} extends CI_Migration
+{
+	function up()
+  {
 		\$this->dbforge->add_field(array(
 			'id' => array(
 				'type' => 'INT',
@@ -195,7 +205,8 @@ class Migration_{class} extends CI_Migration {
 		\$this->dbforge->create_table('{table}');
 	}
 
-	function down() {
+	function down()
+	{
 		\$this->dbforge->drop_table('{table}');
 	}
 }";
@@ -230,13 +241,15 @@ class Migration_{class} extends CI_Migration {
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class {class} extends CI_Controller {
+class {class} extends CI_Controller
+{
 	var {var_model};
 
 	var \$input;
 	var \$layout;
 
-	function __construct() {
+	function __construct()
+	{
 		parent::__construct();
 		\$this->load->helper(['html', 'url', 'form', '{component}']);
 		\$this->load->library(['form_validation', 'layout']);
@@ -244,12 +257,14 @@ class {class} extends CI_Controller {
 		\$this->layout->set('app');
 	}
 
-	function index() {
+	function index()
+	{
 		\$data['{table}'] = \$this->{model}->find_all();
 		\$this->layout->view('{table}/index', \$data);
 	}
 
-	function create() {
+	function create()
+	{
 		if (\$this->input->post()) {
 			{var} = {component}_form();
 			\$this->{model}->save({var});
@@ -258,17 +273,19 @@ class {class} extends CI_Controller {
 		\$this->layout->view('{table}/create');
 	}
 
-	function edit(\$id) {
+	function edit(\$id)
+	{
 		if (\$this->input->post()) {
 			{var} = {component}_form();
 			\$this->{model}->update({var}, \$id);
-      redirect('{table}');
+			redirect('{table}');
 		}
 		\$data['{component}'] = \$this->{model}->read(\$id);
 		\$this->layout->view('{table}/edit', \$data);
 	}
 
-	function delete(\$id) {
+	function delete(\$id)
+	{
 		\$this->{model}->delete(\$id);
 		redirect('{table}');
 	}
@@ -288,7 +305,7 @@ class {class} extends CI_Controller {
     $var = '$' . $component;
     $vars = '$' . pluralize($component);
     $model = ucfirst($component);
-    $models = pluralize($component);
+    $models = pluralize($model);
     $table = pluralize($component);
     $dir = 'application/views/' . pluralize($component);
     if (!is_dir($dir)) {
