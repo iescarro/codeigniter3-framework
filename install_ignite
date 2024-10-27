@@ -1,0 +1,7 @@
+<?php
+
+if (copy(__DIR__ . '/ignite', __DIR__ . '/../../../ignite')) {
+  echo "Ignite installed successfully!\n";
+} else {
+  echo "Failed to copy ignite\n";
+}
