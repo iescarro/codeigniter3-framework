@@ -233,13 +233,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class {class} extends CI_Controller {
 	var {var_model};
 
-  var \$input;
+	var \$input;
+	var \$layout;
 
 	function __construct() {
 		parent::__construct();
 		\$this->load->helper(['html', 'url', 'form', '{component}']);
-		\$this->load->library(['form_validation']);
+		\$this->load->library(['form_validation', 'layout']);
 		\$this->load->model(['{model}']);
+		\$this->layout->set('app');
 	}
 
 	function index() {
