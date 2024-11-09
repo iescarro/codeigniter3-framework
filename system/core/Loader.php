@@ -406,6 +406,13 @@ class CI_Loader {
 		return $this;
 	}
 
+	// --------------------------------------------------------------------
+
+	/**
+	 * Jobs loader
+	 *
+	 * @return	object
+	 */
 	public function jobs()
 	{
 		// Define the path to the jobs directory
@@ -421,6 +428,34 @@ class CI_Loader {
 				// Ensure we only include PHP files
 				if (pathinfo($file, PATHINFO_EXTENSION) === 'php') {
 					require_once $jobs_path . $file;
+				}
+			}
+		}
+		return $this;
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
+	 * Events loader
+	 *
+	 * @return	object
+	 */
+	public function events()
+	{
+		// Define the path to the events directory
+		$events_path = APPPATH . 'events/';
+
+		// Check if the events directory exists
+		if (is_dir($events_path)) {
+			// Scan the jobs directory for PHP files
+			$files = scandir($events_path);
+
+			// Loop through each file and include it
+			foreach ($files as $file) {
+				// Ensure we only include PHP files
+				if (pathinfo($file, PATHINFO_EXTENSION) === 'php') {
+					require_once $events_path . $file;
 				}
 			}
 		}
