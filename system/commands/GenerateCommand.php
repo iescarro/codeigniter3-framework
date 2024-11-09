@@ -212,11 +212,14 @@ class Migration_{class} extends CI_Migration
 }";
     $columns = '';
 
-    foreach ($this->fields as $column => $type) {
-      $columns .= "			'$column' => array(
-				'type' => '$type',
+    if ($this->fields) {
+      foreach ($this->fields as $column => $type) {
+        $constraint = $type == 'varchar' ? "\n				'constraint' => 255," : "";
+        $columns .= "			'$column' => array(
+				'type' => '$type',$constraint
 				'null' => TRUE,
 			),\n";
+      }
     }
     $content = str_replace(
       ['{table}', '{class}', '{columns}'],
@@ -375,7 +378,7 @@ class {class} extends CI_Controller
     // Edit
     $filename = $dir . '/edit.php';
     $content = "<h3>Edit {component}</h3>
-<?= form_open('{table}/edit/' . {var}->id) ?>		
+<?= form_open('{table}/edit/' . {var}->id) ?>
 {fields}
 	<p>
 		<?= form_submit('submit', 'Update {component}', 'class=\"btn btn-outline-success\"') ?>
