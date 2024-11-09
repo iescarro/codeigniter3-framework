@@ -10,6 +10,7 @@
 	},
 	"require": {
 		"php": ">=5.4.8",
+		"symfony/console": "^7.1",
 		"phpmailer/phpmailer": "^6.9",
     "pusher/pusher-php-server": "^7.2"
 	},
@@ -34,7 +35,8 @@
 		"psr-4": {
 			"CodeIgniter3\\": [
 				"system/core"
-			]
+			],
+			"CodeIgniter3\\Commands\\": "system/commands"
 		}
 	}
 }
