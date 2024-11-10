@@ -112,48 +112,6 @@ class CI_Config {
 		}
 
 		log_message('info', 'Config Class Initialized');
-
-		$this->load_env();
-		log_message('info', 'Autoload Environment Variables');
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Load Env File
-	 *
-	 * @param	string	$file							Environment file name
-	 * @param	bool		$use_sections			Whether configuration values should be loaded into their own section
-	 * @param	bool		$fail_gracefully	Whether to just return FALSE or display an error message
-	 * @return	bool	TRUE if the file was loaded correctly or FALSE on failure
-	 */
-	function load_env($file_path = '.env')
-	{
-		$env_file = FCPATH . '/../' . $file_path;
-		if (!file_exists($env_file)) {
-      return;
-    }
-
-    $lines = file($env_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    foreach ($lines as $line) {
-      // Skip comments
-      if (strpos(trim($line), '#') === 0) {
-        continue;
-      }
-
-      // Split key and value
-      list($key, $value) = explode('=', $line, 2);
-
-      // Remove any quotes around the value
-      $value = trim($value, '"\' ');
-
-      // Set environment variable if not already set
-      if (!isset($_ENV[$key]) && !isset($_SERVER[$key])) {
-        putenv("$key=$value");
-				$_ENV[$key] = $value;
-        $_SERVER[$key] = $value;
-      }
-    }
 	}
 
 	// --------------------------------------------------------------------
