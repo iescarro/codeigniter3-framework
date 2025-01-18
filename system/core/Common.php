@@ -64,7 +64,7 @@ if ( ! function_exists('load_env'))
 	*/
 	function load_env($file_path = '.env')
 	{
-		$env_file = FCPATH . '/../' . $file_path;
+		$env_file = ROOT_PATH . '/' . $file_path;
 		if (!file_exists($env_file)) {
 		 return;
 		}
