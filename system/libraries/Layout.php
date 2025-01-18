@@ -40,6 +40,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class CI_Layout
 {
   protected $layout;
+  protected $theme;
   protected $CI;
 
   public function __construct($params = array())
@@ -59,18 +60,24 @@ class CI_Layout
     $this->layout = $layout;
   }
 
-  function theme($theme) {
-    $this->theme = $theme;
+  function theme($theme = '')
+  {
+    if ($theme) {
+      $this->theme = $theme;
+    }
+    return $this->theme;
   }
 }
 
-function get_theme() {
+function get_theme()
+{
   $obj = &get_instance();
   $obj->load->library('layout');
-  return $obj->layout->get_theme();
+  return $obj->layout->theme();
 }
 
-function load_view($view, $data = null) {
+function load_view($view, $data = null)
+{
   $obj = &get_instance();
   $obj->load->library('layout');
   $obj->load->view(get_theme() . '/' . $view, $data);
