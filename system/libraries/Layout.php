@@ -49,13 +49,29 @@ class CI_Layout
 
   public function view($view, $vars = array(), $return = FALSE)
   {
-    $vars['content'] = $this->CI->load->view($view, $vars, TRUE);
+    $vars['content'] = $this->CI->load->view($this->theme . '/' . $view, $vars, TRUE);
     $layout_path = 'layouts' . '/' . $this->layout;
-    return $this->CI->load->view($layout_path, $vars, $return);
+    return $this->CI->load->view($this->theme . '/' . $layout_path, $vars, $return);
   }
 
   public function set($layout)
   {
     $this->layout = $layout;
   }
+
+  function theme($theme) {
+    $this->theme = $theme;
+  }
+}
+
+function get_theme() {
+  $obj = &get_instance();
+  $obj->load->library('layout');
+  return $obj->layout->get_theme();
+}
+
+function load_view($view, $data = null) {
+  $obj = &get_instance();
+  $obj->load->library('layout');
+  $obj->load->view(get_theme() . '/' . $view, $data);
 }
