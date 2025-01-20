@@ -50,9 +50,8 @@ class CI_Layout
 
   public function view($view, $vars = array(), $return = FALSE)
   {
-    $vars['content'] = $this->CI->load->view($this->theme . '/' . $view, $vars, TRUE);
-    $layout_path = 'layouts' . '/' . $this->layout;
-    return $this->CI->load->view($this->theme . '/' . $layout_path, $vars, $return);
+    $vars['content'] = $this->CI->load->view($this->theme . '/' . $view, $vars, true);
+    return $this->CI->load->view($this->theme . '/' . $this->layout, $vars, $return);
   }
 
   public function set($layout)
