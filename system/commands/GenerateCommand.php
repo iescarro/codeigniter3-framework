@@ -320,7 +320,7 @@ class {class} extends CI_Controller
     $filename = $dir . '/index.php';
     $content = "<h3>{models}</h3>
 <p>
-	<?= anchor('{table}/create', 'Create {model}', 'class=\"btn btn-outline-success\"') ?>
+	<?php echo anchor('{table}/create', 'Create {model}', 'class=\"btn btn-outline-success\"') ?>
 </p>
 <table class=\"table table-hover\">
 	<tr>
@@ -331,7 +331,7 @@ class {class} extends CI_Controller
 		<tr>
 {columns}
 			<td>
-				<?= anchor('{table}/edit/' . {var}->id, 'Edit'); ?>
+				<?php echo anchor('{table}/edit/' . {var}->id, 'Edit'); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
@@ -341,7 +341,7 @@ class {class} extends CI_Controller
     foreach ($this->fields as $column => $type) {
       $header = ucfirst($column);
       $headers .= "		<th>{$header}</t>\n";
-      $columns .= "			<td><?= {$var}->{$column} ?></td>\n";
+      $columns .= "			<td><?php echo {$var}->{$column} ?></td>\n";
     }
     $content = str_replace(
       ['{var}', '{vars}', '{models}', '{model}', '{headers}', '{columns}', '{table}'],
@@ -353,19 +353,19 @@ class {class} extends CI_Controller
     // Create
     $filename = $dir . '/create.php';
     $content = "<h3>Create {component}</h3>
-<?= form_open('{table}/create'); ?>
+<?php echo form_open('{table}/create'); ?>
 {fields}
 	<p>
-		<?= form_submit('submit', 'Save {component}', 'class=\"btn btn-outline-success\"'); ?>
-		or <?= anchor('{table}', 'cancel'); ?>
+		<?php echo form_submit('submit', 'Save {component}', 'class=\"btn btn-outline-success\"'); ?>
+		or <?php echo anchor('{table}', 'cancel'); ?>
 	</p>
-<?= form_close(); ?>";
+<?php echo form_close(); ?>";
     $fields = '';
     foreach ($this->fields as $column => $type) {
       $header = ucfirst($column);
       $fields .= "	<p>
 		{$header}<br>
-		<?= form_input('$column', \$this->input->post('$column'), 'class=\"form-control\"'); ?>
+		<?php echo form_input('$column', \$this->input->post('$column'), 'class=\"form-control\"'); ?>
 	</p>\n";
     }
     $content = str_replace(
@@ -378,24 +378,24 @@ class {class} extends CI_Controller
     // Edit
     $filename = $dir . '/edit.php';
     $content = "<h3>Edit {component}</h3>
-<?= form_open('{table}/edit/' . {var}->id) ?>
+<?php echo form_open('{table}/edit/' . {var}->id) ?>
 {fields}
 	<p>
-		<?= form_submit('submit', 'Update {component}', 'class=\"btn btn-outline-success\"') ?>
-		or <?= anchor('{table}', 'cancel'); ?>
+		<?php echo form_submit('submit', 'Update {component}', 'class=\"btn btn-outline-success\"') ?>
+		or <?php echo anchor('{table}', 'cancel'); ?>
 	</p>
-<?= form_close() ?>
+<?php echo form_close() ?>
 
-<?= form_open('{table}/delete/' . {var}->id, array('onsubmit', 'return confirmDelete')) ?>
+<?php echo form_open('{table}/delete/' . {var}->id, array('onsubmit', 'return confirmDelete')) ?>
 	<?php echo form_hidden(\$this->security->get_csrf_token_name(), \$this->security->get_csrf_hash()); ?>
-	<button type='submit' class=\"btn btn-outline-success\">Delete</button>
-<?= form_close() ?>";
+	<button type='submit' class=\"btn btn-outline-danger\">Delete</button>
+<?php echo form_close() ?>";
     $fields = '';
     foreach ($this->fields as $column => $type) {
       $header = ucfirst($column);
       $fields .= "	<p>
 		{$header}<br>
-		<?= form_input('$column', {$var}->{$column}, 'class=\"form-control\"'); ?>
+		<?php echo form_input('$column', {$var}->{$column}, 'class=\"form-control\"'); ?>
 	</p>\n";
     }
     $content = str_replace(
