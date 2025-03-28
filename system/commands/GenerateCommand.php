@@ -183,6 +183,16 @@ function {component}_form()
     $table = lcfirst(pluralize($this->component));
     $class = 'Create_' . $table;
     $var = '$' . lcfirst($this->component);
+    $columns = '';
+    if ($this->fields) {
+      foreach ($this->fields as $column => $type) {
+        $constraint = $type == 'varchar' ? "\n				'constraint' => 255," : "";
+        $columns .= "			'$column' => array(
+				'type' => '$type',$constraint
+				'null' => TRUE,
+			),\n";
+      }
+    }
     $filename = $dir . '/' . date('YmdHis')  . '_' . $class . '.php';
     $content = "<?php
 
@@ -210,17 +220,6 @@ class Migration_{class} extends CI_Migration
 		\$this->dbforge->drop_table('{table}');
 	}
 }";
-    $columns = '';
-
-    if ($this->fields) {
-      foreach ($this->fields as $column => $type) {
-        $constraint = $type == 'varchar' ? "\n				'constraint' => 255," : "";
-        $columns .= "			'$column' => array(
-				'type' => '$type',$constraint
-				'null' => TRUE,
-			),\n";
-      }
-    }
     $content = str_replace(
       ['{table}', '{class}', '{columns}'],
       [$table, $class, $columns],
