@@ -257,7 +257,7 @@ class {class} extends CI_Controller
 		\$this->load->helper(['html', 'url', 'form', '{component}']);
 		\$this->load->library(['form_validation', 'layout']);
 		\$this->load->model(['{model}']);
-		\$this->layout->set('app');
+		\$this->layout->set('layouts/app');
 	}
 
 	function index()
