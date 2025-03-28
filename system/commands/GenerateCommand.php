@@ -191,7 +191,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Migration_{class} extends CI_Migration
 {
 	function up()
-  {
+	{
 		\$this->dbforge->add_field(array(
 			'id' => array(
 				'type' => 'INT',
