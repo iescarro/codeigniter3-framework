@@ -58,7 +58,7 @@ if (! function_exists('print_pre')) {
 	 *
 	 * @param	object
 	 * @param	string
-	 * @return	string	Text enclosed with <pre> element for better debugging
+	 * @return	void	Text enclosed with <pre> element for better debugging
 	 */
 	function print_pre($obj, $pre_text = '')
 	{
