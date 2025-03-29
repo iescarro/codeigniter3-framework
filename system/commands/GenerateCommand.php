@@ -408,6 +408,150 @@ class {class} extends CI_Controller
   }
 }
 
+class MigrationGenerator
+{
+  static function create($command)
+  {
+    print_r($command);
+    if ($command == 'Create') {
+      return new CreateMigrationGenerator();
+    } else if ($command == 'Add') {
+      return new AddMigrationGenerator();
+    }
+    return new EmptyMigrationGenerator();
+  }
+}
+
+class EmptyMigrationGenerator extends MigrationGenerator
+{
+  function create_migration($components, $fields, $dir, $table, $output)
+  {
+    $class = implode('_', $components);
+    $filename = $dir . '/' . date('YmdHis')  . '_' . $class . '.php';
+    $content = "<?php
+
+defined('BASEPATH') or exit('No direct script access allowed');
+
+class Migration_{class} extends CI_Migration
+{
+	function up()
+	{
+		\$fields = array();
+		\$this->dbforge->modify_column('{table}', \$fields);
+	}
+
+	function down()
+	{
+		\$fields = array();
+		\$this->dbforge->modify_column('{table}', \$fields);
+	}
+}";
+    $content = str_replace(
+      ['{table}', '{class}'],
+      [$table, $class],
+      $content
+    );
+    file_put_contents($filename, $content);
+    $output->writeln('<info>Migration generated successfully!</info>');
+  }
+}
+
+class AddMigrationGenerator extends MigrationGenerator
+{
+  function create_migration($components, $fields, $dir, $table, $output)
+  {
+    // print_r($fields);
+    $class = implode('_', $components);
+    array_shift($components);
+    // print_r($components);
+    $components_without_command = implode('_', $components);
+    $column_name = trim(explode('to', $components_without_command)[0], '_');
+    // print_r($column_name);
+    $filename = $dir . '/' . date('YmdHis')  . '_' . $class . '.php';
+    $content = "<?php
+
+defined('BASEPATH') or exit('No direct script access allowed');
+
+class Migration_{class} extends CI_Migration
+{
+	function up()
+	{
+		\$fields = array(
+			'{column_name}' => array(
+				'type' => 'INT',
+				'constraint' => 5,
+				'unsigned' => TRUE
+			),
+		);
+		\$this->dbforge->add_column('{table}', \$fields);
+	}
+
+	function down()
+	{
+		\$this->dbforge->drop_column('{table}', '{column_name}');
+	}
+}";
+    $content = str_replace(
+      ['{table}', '{class}', '{column_name}'],
+      [$table, $class, $column_name],
+      $content
+    );
+    file_put_contents($filename, $content);
+    $output->writeln('<info>Migration generated successfully!</info>');
+  }
+}
+
+class CreateMigrationGenerator extends MigrationGenerator
+{
+  function create_migration($components, $fields, $dir, $table, $output)
+  {
+    $class = implode('_', $components);
+    $columns = '';
+    if ($fields) {
+      foreach ($fields as $column => $type) {
+        $constraint = $type == 'varchar' ? "\n				'constraint' => 255," : "";
+        $columns .= "			'$column' => array(
+				'type' => '$type',$constraint
+				'null' => TRUE,
+			),\n";
+      }
+    }
+    $filename = $dir . '/' . date('YmdHis')  . '_' . $class . '.php';
+    $content = "<?php
+
+defined('BASEPATH') or exit('No direct script access allowed');
+
+class Migration_{class} extends CI_Migration
+{
+	function up()
+	{
+		\$this->dbforge->add_field(array(
+			'id' => array(
+				'type' => 'INT',
+				'constraint' => 5,
+				'unsigned' => TRUE,
+				'auto_increment' => TRUE
+			),
+{columns}
+		));
+		\$this->dbforge->add_key('id', TRUE);
+		\$this->dbforge->create_table('{table}');
+	}
+
+	function down()
+	{
+		\$this->dbforge->drop_table('{table}');
+	}
+}";
+    $content = str_replace(
+      ['{table}', '{class}', '{columns}'],
+      [$table, $class, $columns],
+      $content
+    );
+    file_put_contents($filename, $content);
+    $output->writeln('<info>Migration generated successfully!</info>');
+  }
+}
 function pluralize($word)
 {
   $plural = [
