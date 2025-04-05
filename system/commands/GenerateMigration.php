@@ -62,7 +62,15 @@ class GenerateMigration extends Command
     $fields = $input->getArgument('fields');
 
     $generator = new Generator($component, $fields);
-    $generator->generate_migration($output);
+
+    $components = explode('_', $component);
+    // print_r($components);
+    if (count($components) == 1) {
+      $generator->generate_migration($output);
+    } else {
+      $prefix = ''; // implode('_', $components);
+      $generator->generate_migration($output, $prefix);
+    }
 
     return Command::SUCCESS;
   }

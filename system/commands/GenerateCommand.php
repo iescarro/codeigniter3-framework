@@ -177,12 +177,31 @@ function {component}_form()
     $output->writeln('<info>Helper generated successfully!</info>');
   }
 
-  function generate_migration($output)
+  function generate_migration($output, $prefix = 'Create')
   {
     $dir = 'application/migrations';
-    $table = lcfirst(pluralize($this->component));
-    $class = 'Create_' . $table;
-    $var = '$' . lcfirst($this->component);
+    // $table = lcfirst(pluralize($this->component));
+    // $class = $prefix . $table;
+    // $var = '$' . lcfirst($this->component);
+
+    $components = explode('_', $this->component); // split_pascal_case($this->component);
+    if ($prefix) {
+      array_unshift($components, $prefix);
+    }
+    $table = pluralize(lcfirst(end($components)));
+    // print_r($table);
+    print_r($prefix);
+    // print_r($components);
+
+    $last_index = count($components) - 1;
+    $components[$last_index] = pluralize(lcfirst($components[$last_index]));
+
+    $command = ucfirst(reset($components));
+    $migration = MigrationGenerator::create($command);
+    $migration->create_migration($components, $this->fields, $dir, $table, $output);
+
+    /*
+    $class = implode('_', $components);
     $columns = '';
     if ($this->fields) {
       foreach ($this->fields as $column => $type) {
@@ -299,6 +318,7 @@ class {class} extends CI_Controller
     );
     file_put_contents($filename, $content);
     $output->writeln('<info>Controller generated successfully!</info>');
+    */
   }
 
   function generate_views($output)
@@ -552,6 +572,13 @@ class Migration_{class} extends CI_Migration
     $output->writeln('<info>Migration generated successfully!</info>');
   }
 }
+
+function split_pascal_case($input)
+{
+  // Use preg_split to split at each uppercase letter, keeping each part
+  return preg_split('/(?=[A-Z])/', $input, -1, PREG_SPLIT_NO_EMPTY);
+}
+
 function pluralize($word)
 {
   $plural = [
