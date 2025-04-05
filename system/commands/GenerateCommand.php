@@ -432,7 +432,7 @@ class MigrationGenerator
 {
   static function create($command)
   {
-    print_r($command);
+    // print_r($command);
     if ($command == 'Create') {
       return new CreateMigrationGenerator();
     } else if ($command == 'Add') {
