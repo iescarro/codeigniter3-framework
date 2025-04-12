@@ -190,7 +190,7 @@ function {component}_form()
     }
     $table = pluralize(lcfirst(end($components)));
     // print_r($table);
-    print_r($prefix);
+    // print_r($prefix);
     // print_r($components);
 
     $last_index = count($components) - 1;
@@ -246,6 +246,7 @@ class Migration_{class} extends CI_Migration
     );
     file_put_contents($filename, $content);
     $output->writeln('<info>Migration generated successfully!</info>');
+    */
   }
 
   function generate_controller($output)
@@ -318,7 +319,6 @@ class {class} extends CI_Controller
     );
     file_put_contents($filename, $content);
     $output->writeln('<info>Controller generated successfully!</info>');
-    */
   }
 
   function generate_views($output)
