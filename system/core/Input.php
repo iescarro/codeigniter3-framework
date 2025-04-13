@@ -205,6 +205,34 @@ class CI_Input {
 	// --------------------------------------------------------------------
 
 	/**
+	 * Fetch an item from raw JSON input data
+	 *
+	 * This method retrieves an item from the JSON data sent via a POST request. 
+	 * If a key is provided, it will fetch the specific value associated with that key.
+	 * If no key is provided, it will return the entire JSON data as an array.
+	 * If the key does not exist in the data, the provided default value will be returned.
+	 *
+	 * @param	string	$key		The key of the item to fetch from the JSON data
+	 * @param	mixed	$default	The default value to return if the key doesn't exist in the JSON data
+	 * @return	mixed				The value associated with the key or the default value
+	 */
+	public function json($key = null, $default = null)
+	{
+		// Get raw JSON data from php://input
+		$json_data = json_decode(file_get_contents('php://input'), true);
+
+		// If no specific key is provided, return all JSON data
+		if ($key === null) {
+			return $json_data;
+		}
+
+		// Return the value of the specific key or default if not found
+		return isset($json_data[$key]) ? $json_data[$key] : $default;
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
 	 * Fetch an item from POST data with fallback to GET
 	 *
 	 * @param	string	$index		Index for item to be fetched from $_POST or $_GET
