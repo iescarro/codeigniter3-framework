@@ -233,6 +233,44 @@ class CI_Input {
 	// --------------------------------------------------------------------
 
 	/**
+	 * Fetch a value from POST, JSON, or GET input
+	 *
+	 * This method checks for a value in the following order:
+	 * 1. $_POST
+	 * 2. JSON input body (application/json)
+	 * 3. $_GET
+	 *
+	 * @param	string	$key		Key to look for
+	 * @param	mixed	$default	Default value if key is not found
+	 * @return	mixed
+	 */
+	public function flex($key, $default = null)
+	{
+		// Try POST first
+		$post_val = $this->post($key);
+		if (!is_null($post_val)) {
+			return $post_val;
+		}
+
+		// Then try JSON input
+		$json_data = json_decode(file_get_contents('php://input'), true);
+		if (is_array($json_data) && array_key_exists($key, $json_data)) {
+			return $json_data[$key];
+		}
+
+		// Finally, try GET
+		$get_val = $this->get($key);
+		if (!is_null($get_val)) {
+			return $get_val;
+		}
+
+		// Return default if nothing found
+		return $default;
+	}
+
+	// --------------------------------------------------------------------
+
+	/**
 	 * Fetch an item from POST data with fallback to GET
 	 *
 	 * @param	string	$index		Index for item to be fetched from $_POST or $_GET
