@@ -359,7 +359,7 @@ class {class} extends CI_Controller
     $columns = '';
     foreach ($this->fields as $column => $type) {
       $header = ucfirst($column);
-      $headers .= "		<th>{$header}</t>\n";
+      $headers .= "		<th>{$header}</th>\n";
       $columns .= "			<td><?php echo {$var}->{$column} ?></td>\n";
     }
     $content = str_replace(
