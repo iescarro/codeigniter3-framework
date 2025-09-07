@@ -136,6 +136,16 @@ class SmtpMailer implements IMailer
     // $mail->addAttachment('/tmp/image.jpg', 'new.jpg'); // Optional name
   }
 
+  function attach($file, $name = '')
+  {
+    if ($name) {
+      $this->mail->addAttachment($file, $name); // Optional name
+    } else {
+      $this->mail->addAttachment($file); // Add attachments
+    }
+    return $this;
+  }
+
   function settings($smtp_host, $smtp_port, $smtp_user, $smtp_pass)
   {
     // Server settings
