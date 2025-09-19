@@ -41,6 +41,7 @@ namespace CodeIgniter3\Commands;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Input\InputOption;
 
 class ServeCommand extends Command
 {
@@ -50,13 +51,23 @@ class ServeCommand extends Command
   {
     $this
       ->setName('serve')
+      ->addOption(
+        'port',
+        'p',
+        InputOption::VALUE_OPTIONAL,
+        'The port to serve the application on',
+        9000 // default value
+      )
       ->setDescription('');
   }
 
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
-    $output->writeln('Starting PHP development server on localhost:9000...');
-    exec('php -S localhost:9000 -t public', $outputLines, $returnCode);
+    $port = $input->getOption('port');
+
+    $output->writeln("Starting PHP development server on localhost:{$port}...");
+    $command = sprintf('php -S localhost:%d -t public', $port);
+    exec($command, $outputLines, $returnCode);
 
     if ($returnCode === 0) {
       $output->writeln('<info>Server started successfully!</info>');
