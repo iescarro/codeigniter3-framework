@@ -56,7 +56,7 @@ class ServeCommand extends Command
         'p',
         InputOption::VALUE_OPTIONAL,
         'The port to serve the application on',
-        9000 // default value
+        8000 // default value
       )
       ->setDescription('');
   }
