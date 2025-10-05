@@ -64,9 +64,6 @@ class MakeEventCommand extends Command
 
 class {$event} implements IBroadcast
 {
-  var \$user;
-  var \$message;
-
   function __construct()
   {
   }
