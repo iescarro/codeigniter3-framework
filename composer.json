@@ -1,42 +1,41 @@
 {
-	"description": "The CodeIgniter3 Framework",
-	"name": "iescarro/codeigniter3-framework",
-	"homepage": "https://github.com/iescarro/codeigniter3-framework",
-	"license": "MIT",
-	"support": {
-		"forum": "https://github.com/iescarro/codeigniter3-framework/issues",
-		"wiki": "https://github.com/iescarro/codeigniter3-framework/wiki",
-		"source": "https://github.com/iescarro/codeigniter3-framework"
-	},
-	"require": {
-		"php": ">=5.4.8",
-		"symfony/console": "^7.1",
-		"phpmailer/phpmailer": "^6.9",
-    "pusher/pusher-php-server": "^7.2"
-	},
-	"suggest": {
-		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
-	},
-	"scripts": {
-		"test:coverage": [
-			"@putenv XDEBUG_MODE=coverage",
-			"phpunit --color=always --coverage-text --configuration tests/travis/sqlite.phpunit.xml"
-		],
-		"post-install-cmd": [
-		],
-		"post-update-cmd": [
-		]
-	},
-	"require-dev": {
-		"mikey179/vfsstream": "1.6.*",
-		"phpunit/phpunit": "4.* || 5.* || 9.*"
-	},
-	"autoload": {
-		"psr-4": {
-			"CodeIgniter3\\": [
-				"system/core"
-			],
-			"CodeIgniter3\\Commands\\": "system/commands"
-		}
-	}
+  "description": "The CodeIgniter3 Framework",
+  "name": "iescarro/codeigniter3-framework",
+  "homepage": "https://github.com/iescarro/codeigniter3-framework",
+  "license": "MIT",
+  "support": {
+    "forum": "https://github.com/iescarro/codeigniter3-framework/issues",
+    "wiki": "https://github.com/iescarro/codeigniter3-framework/wiki",
+    "source": "https://github.com/iescarro/codeigniter3-framework"
+  },
+  "require": {
+    "php": ">=5.4.8",
+    "symfony/console": "^7.1",
+    "phpmailer/phpmailer": "^6.9",
+    "pusher/pusher-php-server": "^7.2",
+    "iescarro/php-util": "dev-main"
+  },
+  "suggest": {
+    "paragonie/random_compat": "Provides better randomness in PHP 5.x"
+  },
+  "scripts": {
+    "test:coverage": [
+      "@putenv XDEBUG_MODE=coverage",
+      "phpunit --color=always --coverage-text --configuration tests/travis/sqlite.phpunit.xml"
+    ],
+    "post-install-cmd": [],
+    "post-update-cmd": []
+  },
+  "require-dev": {
+    "mikey179/vfsstream": "1.6.*",
+    "phpunit/phpunit": "4.* || 5.* || 9.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "CodeIgniter3\\": [
+        "system/core"
+      ],
+      "CodeIgniter3\\Commands\\": "system/commands"
+    }
+  }
 }
