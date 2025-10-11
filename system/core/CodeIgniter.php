@@ -38,6 +38,8 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+use function Util\load_env;
+
 /**
  * System Initialization File
  *
@@ -94,7 +96,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *  Load environment variables from .env file
  * ------------------------------------------------------
  */
- load_env();
+ load_env(ROOT_PATH . '/.env');
 
 /*
  * ------------------------------------------------------
